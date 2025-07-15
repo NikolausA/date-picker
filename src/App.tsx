@@ -1,35 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { SuperDatePicker } from "./features/super-date-picker/ui/SuperDatePicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+const quickRanges = [
+  { label: "Last 15 minutes", from: "now-15m", to: "now" },
+  { label: "Last 1 hour", from: "now-1h", to: "now" },
+  { label: "Last 7 days", from: "now-7d", to: "now" },
+  { label: "Today", from: "now-0d", to: "now" },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="min-h-screen p-8 bg-gray-100 dark:bg-gray-800">
+        <SuperDatePicker
+          quickRanges={quickRanges}
+          onChange={({ start, end }) => {
+            console.log("[App] Selected range:", start, end);
+          }}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
